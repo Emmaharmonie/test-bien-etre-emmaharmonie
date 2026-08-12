@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Bilan Charge Mentale Gratuit | EmmaHarmonie</title>
+
+<meta name="description" content="Évaluez gratuitement votre niveau de charge mentale en moins de 3 minutes. Recevez un bilan personnalisé, des conseils adaptés et découvrez les solutions proposées par EmmaHarmonie.">
+
+<meta name="robots" content="index,follow">
+
+<meta name="theme-color" content="#3f5c77">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="emmaharmonie.css">
+
+</head>
+
+<body>
+
+<header class="hero">
+
+<div class="hero-overlay"></div>
+
+<div class="hero-content">
+
+<div class="badge">
+
+🌿 EmmaHarmonie
+
+</div>
+
+<h1>
+
+Bilan professionnel de votre charge mentale
+
+</h1>
+
+<p class="hero-text">
+
+Prenez quelques minutes pour faire le point sur votre niveau de charge mentale.
+
+Ce bilan gratuit vous permet d'identifier les principaux facteurs qui peuvent peser sur votre équilibre personnel, émotionnel et professionnel.
+
+<br><br>
+
+À l'issue du questionnaire, vous découvrirez un profil personnalisé accompagné de conseils concrets afin de retrouver davantage de sérénité dans votre quotidien.
+
+</p>
+
+<div class="hero-infos">
+
+<div class="info-card">
+⏱️
+<span>Moins de 3 minutes</span>
+</div>
+
+<div class="info-card">
+🔒
+<span>100 % confidentiel</span>
+</div>
+
+<div class="info-card">
+📊
+<span>Bilan personnalisé</span>
+</div>
+
+<div class="info-card">
+🌿
+<span>Conseils adaptés</span>
+</div>
+
+</div>
+
+<button
+id="startBtn"
+class="primary-btn">
+
+Commencer gratuitement →
+
+</button>
+
+</div>
+
+</header>
+
+<main>
+
+<section
+id="quizSection"
+class="hidden">
+
+<div class="quiz-container">
+
+<div class="progress-top">
+
+<div class="progress-text">
+
+<span id="questionNumber">
+
+Question 1 / 15
+
+</span>
+
+<span id="progressPercent">
+
+0 %
+
+</span>
+
+</div>
+
+<div class="progress-bar">
+
+<div id="progressFill"></div>
+
+</div>
+
+</div>
+
+<div class="question-card">
+
+<h2 id="questionTitle"></h2>
+
+<div id="answersContainer"></div>
+
+</div>
+
+<div class="navigation">
+
+<button
+id="previousBtn"
+class="secondary-btn">
+
+← Précédent
+
+</button>
+
+<button
+id="nextBtn"
+class="primary-btn">
+
+Suivant →
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<section
+id="resultSection"
+class="hidden">
+
+<div class="result-container">
+
+<div class="score-circle">
+
+<svg viewBox="0 0 220 220">
+
+<circle
+class="bg-circle"
+cx="110"
+cy="110"
+r="90">
+</circle>
+
+<circle
+id="scoreCircle"
+class="progress-circle"
+cx="110"
+cy="110"
+r="90">
+</circle>
+
+</svg>
+
+<div class="score-content">
+
+<span id="scoreValue">
+
+0%
+
+</span>
+
+<small>
+
+Niveau de charge mentale
+
+</small>
+
+</div>
+
+</div>
+<div class="global-result">
+
+    <h2 id="globalTitle"></h2>
+
+    <p id="globalText"></p>
+
+</div>
+
+<div class="profiles" style="text-align:center;">
+
+<h2 class="result-title">
+
+🧠 Votre profil personnalisé
+
+</h2>
+
+<p class="result-subtitle">
+
+Les trois dimensions ci-dessous sont celles qui semblent actuellement avoir le plus d'impact sur votre équilibre.
+
+</p>
+
+<div id="profileCards"></div>
+
+<div style="height:20px;"></div>
+
+</div>
+
+<div class="analysis">
+
+<h3>
+
+🧩 Ce que révèle votre bilan
+
+</h3>
+
+<div id="analysisText"></div>
+
+</div>
+
+<section class="personal-message">
+
+    <h2>💬 Ce que cela signifie pour vous</h2>
+
+    <div id="personalMessage"></div>
+
+</section>
+<div class="tips">
+
+<h3>
+
+🌿 Premières pistes pour retrouver un meilleur équilibre
+
+</h3>
+
+<div id="tipsText"></div>
+
+</div>
+
+<div class="therapy-section">
+
+<div class="therapy-card">
+
+<h3>
+
+🧠 Comment l'hypnose peut vous accompagner
+
+</h3>
+
+<p>
+
+Lorsque la charge mentale devient trop importante, le cerveau reste constamment en activité. Les pensées s'enchaînent, le stress augmente et il devient parfois difficile de retrouver un véritable temps de récupération.
+
+</p>
+
+<p>
+
+L'hypnose permet de favoriser le lâcher-prise, d'apaiser les ruminations, de mieux gérer les émotions et de retrouver progressivement un équilibre plus serein.
+
+</p>
+
+</div>
+
+<div class="therapy-card">
+
+<h3>
+
+🌿 Le Reiki en complément
+
+</h3>
+
+<p>
+
+Le Reiki traditionnel favorise une profonde détente physique et émotionnelle. Beaucoup de personnes ressentent un apaisement durable qui facilite la récupération et contribue à un meilleur équilibre général.
+
+</p>
+
+<p>
+
+Associé à l'hypnose, il constitue une approche complémentaire pour accompagner durablement la diminution de la charge mentale.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="medical-warning">
+
+<strong>
+
+ℹ️ Information importante
+
+</strong>
+
+<p>
+
+Ce bilan est proposé à titre informatif. Il ne constitue ni un diagnostic médical ni un diagnostic psychologique et ne remplace jamais l'avis d'un professionnel de santé.
+
+</p>
+
+<p>
+
+En cas de souffrance importante ou persistante, consultez votre médecin ou un professionnel de santé qualifié.
+
+</p>
+
+</div>
+
+<div class="cta">
+
+<h3>
+🌿 Offrez-vous un véritable moment pour vous
+</h3>
+
+<p>
+
+Votre bilan met en évidence plusieurs éléments qui peuvent influencer votre équilibre actuel.
+
+Une séance personnalisée d'hypnose ou de Reiki permet d'aller plus loin afin d'identifier vos besoins, retrouver davantage de sérénité et mettre en place des solutions adaptées à votre situation.
+
+</p>
+
+<div class="cta-benefits">
+
+<div>✅ Séance personnalisée</div>
+
+<div>✅ Cabinet ou visioconférence</div>
+
+<div>✅ Approche douce et bienveillante</div>
+
+</div>
+
+<a
+href="https://www.planity.com/emmanuelle-luu-emmaharmonie-hypnose-reiki-77450-isles-les-villenoy"
+target="_blank"
+rel="noopener"
+class="booking-btn">
+
+📅 Prendre rendez-vous
+
+</a>
+
+</div>
+
+<a
+href="https://www.planity.com/emmanuelle-luu-emmaharmonie-hypnose-reiki-77450-isles-les-villenoy"
+target="_blank"
+rel="noopener"
+class="booking-btn">
+
+📅 Je souhaite être accompagné(e)
+
+</a>
+
+</div>
+
+</div>
+
+<div class="email-box">
+
+<h3>
+
+📧 Recevoir gratuitement mon bilan personnalisé
+
+</h3>
+
+<p>
+
+Recevez votre bilan par e-mail ainsi que quelques conseils pour mieux comprendre votre charge mentale.
+
+</p>
+
+<input
+type="text"
+id="userName"
+placeholder="Votre prénom (facultatif)">
+
+<input
+type="email"
+id="userEmail"
+placeholder="Votre adresse e-mail">
+
+<label class="rgpd">
+
+<input
+type="checkbox"
+id="rgpd">
+
+J'accepte de recevoir mon bilan personnalisé par e-mail et j'ai pris connaissance de la politique de confidentialité.
+
+</label>
+
+<button
+id="emailBtn"
+class="booking-btn">
+
+📧 Recevoir mon bilan
+
+</button>
+
+</div>
+
+</section>
+
+<section class="seo-content">
+
+<div class="seo-container">
+
+<h2>
+Pourquoi réaliser un bilan de charge mentale ?
+</h2>
+
+<p>
+
+La charge mentale ne concerne pas uniquement le travail. Elle peut résulter d'une accumulation de responsabilités professionnelles, familiales ou personnelles, d'un stress chronique, d'émotions difficiles à gérer ou d'un manque de temps pour soi.
+
+</p>
+
+<p>
+
+Ce bilan a été conçu afin de vous aider à mieux comprendre les principaux facteurs qui peuvent aujourd'hui influencer votre équilibre émotionnel et mental. Les résultats sont fournis à titre informatif et constituent une première étape de réflexion vers un mieux-être durable.
+
+</p>
+
+<h2>
+À qui s'adresse ce bilan ?
+</h2>
+
+<p>
+
+Ce bilan est destiné à toute personne souhaitant prendre du recul sur sa charge mentale, son niveau de stress, ses difficultés à déconnecter ou son équilibre de vie. Il peut également constituer un point de départ avant un accompagnement personnalisé.
+
+</p>
+
+<h2>
+Pourquoi choisir EmmaHarmonie ?
+</h2>
+
+<p>
+
+EmmaHarmonie accompagne les personnes souhaitant retrouver davantage de sérénité grâce à une approche personnalisée combinant l'hypnose et le Reiki traditionnel.
+
+</p>
+
+<p>
+
+🤝 Membre de la Fédération Française d'Hypnose et de Coaching (FFHC), je m'engage à proposer un accompagnement bienveillant, respectueux et adapté à chaque personne, en cabinet près de Meaux ou en visioconférence partout en France.
+
+</p>
+
+<h2>
+Important
+</h2>
+
+<p>
+
+Ce bilan est un outil de prévention et de sensibilisation. Il ne constitue ni un diagnostic médical ni un avis psychologique. En cas de souffrance importante ou persistante, consultez votre médecin ou un professionnel de santé.
+
+</p>
+
+</div>
+
+</section>
+
+</main>
+
+<footer>
+
+<p>
+
+© 2026 EmmaHarmonie — Tous droits réservés
+
+</p>
+
+<p style="margin-top:10px;font-size:14px;opacity:.85;">
+
+Praticienne certifiée en hypnose • Reiki traditionnel • Membre de la Fédération Française d'Hypnose et de Coaching (FFHC)
+
+</p>
+
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
