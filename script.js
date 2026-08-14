@@ -822,9 +822,8 @@ sendEmail.addEventListener("click", async () => {
         const result = await response.json();
 
        if (result.success) {
-    alert("Connexion avec le serveur réussie.");
+    alert("Votre bilan va vous être envoyé par e-mail.");
     console.log(result);
-    window.location.href = "bilan.html";
 } else {
     alert(result.message);
 }
