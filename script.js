@@ -806,7 +806,7 @@ sendEmail.addEventListener("click", async () => {
     try {
 
         const response = await fetch(
-            "https://holy-bread-8d25.cold-scene-540a.workers.dev/",
+            "https://bilan-bien-etre-emmaharmonie.cold-scene-540a.workers.dev/",
             {
                 method: "POST",
                 headers: {
