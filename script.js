@@ -931,7 +931,8 @@ sendEmail.addEventListener("click", async () => {
                     prenom: prenom,
                     email: email,
                     score: finalScore,
-                    profil: mainProfile
+                    profil: finalProfile,
+                    niveau: finalLevel
 })
             }
         );
