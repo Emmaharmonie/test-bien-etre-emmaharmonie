@@ -556,190 +556,207 @@ function showResults(score) {
         CIRCLE_LENGTH - (score / 100) * CIRCLE_LENGTH;
 
     scoreCircle.style.strokeDashoffset = offset;
+
     let resultat;
 
-if (score >= 80) {
+    if (score >= 80) {
 
-    resultat = globalAnalysis.excellent;
+        resultat = globalAnalysis.excellent;
 
-} else if (score >= 60) {
+    } else if (score >= 60) {
 
-    resultat = globalAnalysis.bon;
+        resultat = globalAnalysis.bon;
 
-} else if (score >= 40) {
+    } else if (score >= 40) {
 
-    resultat = globalAnalysis.moyen;
+        resultat = globalAnalysis.moyen;
 
-} else {
+    } else {
 
-    resultat = globalAnalysis.eleve;
+        resultat = globalAnalysis.eleve;
 
-}
+    }
 
-globalTitle.textContent = resultat.title;
-globalText.textContent = resultat.text;
+    globalTitle.textContent = resultat.title;
+    globalText.textContent = resultat.text;
 
 
-/* =====================================================
-   Diagnostic global
-===================================================== */
+    /* =========================================================
+       Diagnostic global
+    ========================================================= */
 
-let diagnostic;
+    let diagnostic;
 
-if (score >= 80) {
 
-    diagnostic = globalAnalysis.excellent;
-    scoreCircle.style.stroke = "#48B87A";
+    if (score >= 80) {
 
-} else if (score >= 60) {
+        diagnostic = globalAnalysis.excellent;
+        scoreCircle.style.stroke = "#48B87A";
 
-    diagnostic = globalAnalysis.bon;
-    scoreCircle.style.stroke = "#82C6A8";
+    } else if (score >= 60) {
 
-} else if (score >= 40) {
+        diagnostic = globalAnalysis.bon;
+        scoreCircle.style.stroke = "#82C6A8";
 
-    diagnostic = globalAnalysis.moyen;
-    scoreCircle.style.stroke = "#E4B363";
+    } else if (score >= 40) {
 
-} else {
+        diagnostic = globalAnalysis.moyen;
+        scoreCircle.style.stroke = "#E4B363";
 
-    diagnostic = globalAnalysis.eleve;
-    scoreCircle.style.stroke = "#D9534F";
+    } else {
 
-}
+        diagnostic = globalAnalysis.eleve;
+        scoreCircle.style.stroke = "#D9534F";
+
+    }
+
     progressFill.style.width = "100%";
+
 
     const sortedProfiles =
         Object.entries(profileScores)
         .sort((a, b) => b[1] - a[1])
         .slice(0, 3);
 
-        const mainProfile = sortedProfiles[0][0];
-        const personalMessage = document.getElementById("personalMessage");
-        const profileMessages = {
 
-    stress: `
-    <p>Le stress semble actuellement être le principal facteur qui influence votre équilibre. Votre cerveau reste probablement en état de vigilance une grande partie de la journée.</p>
+    const mainProfile = sortedProfiles[0][0];
 
-    <p>En retrouvant progressivement des moments de récupération et de relâchement, il devient possible de retrouver davantage de calme intérieur.</p>
-    `,
+    const personalMessage =
+        document.getElementById("personalMessage");
 
-    rumination: `
-    <p>Vos réponses montrent que certaines pensées semblent revenir régulièrement et occuper beaucoup de place dans votre esprit.</p>
 
-    <p>Apprendre à prendre du recul sur ces pensées permet souvent de retrouver davantage de sérénité au quotidien.</p>
-    `,
+    const profileMessages = {
 
-    hyperactivite: `
-    <p>Vous semblez avoir tendance à gérer de nombreuses tâches en parallèle sans toujours vous accorder de véritables temps de récupération.</p>
+        stress: `
+        <p>Le stress semble actuellement être le principal facteur qui influence votre équilibre. Votre cerveau reste probablement en état de vigilance une grande partie de la journée.</p>
 
-    <p>Ralentir légèrement le rythme permet souvent d'améliorer la concentration tout en diminuant la fatigue mentale.</p>
-    `,
+        <p>En retrouvant progressivement des moments de récupération et de relâchement, il devient possible de retrouver davantage de calme intérieur.</p>
+        `,
 
-    fatigue: `
-    <p>Votre bilan montre que la fatigue mentale occupe actuellement une place importante.</p>
+        rumination: `
+        <p>Vos réponses montrent que certaines pensées semblent revenir régulièrement et occuper beaucoup de place dans votre esprit.</p>
 
-    <p>Votre cerveau semble avoir besoin de davantage de récupération afin de retrouver progressivement toute son efficacité.</p>
-    `,
+        <p>Apprendre à prendre du recul sur ces pensées permet souvent de retrouver davantage de sérénité au quotidien.</p>
+        `,
 
-    burnout: `
-    <p>Votre niveau de sollicitation paraît élevé et mérite d'être pris en considération avant que l'épuisement ne s'installe durablement.</p>
+        hyperactivite: `
+        <p>Vous semblez avoir tendance à gérer de nombreuses tâches en parallèle sans toujours vous accorder de véritables temps de récupération.</p>
 
-    <p>Il peut être bénéfique de retrouver progressivement un meilleur équilibre entre vos obligations et votre récupération.</p>
-    `,
+        <p>Ralentir légèrement le rythme permet souvent d'améliorer la concentration tout en diminuant la fatigue mentale.</p>
+        `,
 
-    habitudes: `
-    <p>Votre organisation quotidienne semble aujourd'hui participer à votre charge mentale.</p>
+        fatigue: `
+        <p>Votre bilan montre que la fatigue mentale occupe actuellement une place importante.</p>
 
-    <p>Quelques ajustements simples peuvent parfois apporter rapidement une sensation de légèreté.</p>
-    `,
+        <p>Votre cerveau semble avoir besoin de davantage de récupération afin de retrouver progressivement toute son efficacité.</p>
+        `,
 
-    ecrans: `
-    <p>Les sollicitations numériques semblent occuper une place importante dans votre quotidien.</p>
+        burnout: `
+        <p>Votre niveau de sollicitation paraît élevé et mérite d'être pris en considération avant que l'épuisement ne s'installe durablement.</p>
 
-    <p>Créer quelques moments de déconnexion favorise souvent une récupération mentale plus profonde.</p>
-    `,
+        <p>Il peut être bénéfique de retrouver progressivement un meilleur équilibre entre vos obligations et votre récupération.</p>
+        `,
 
-    emotion: `
-    <p>Les émotions semblent actuellement demander beaucoup d'énergie psychique.</p>
+        habitudes: `
+        <p>Votre organisation quotidienne semble aujourd'hui participer à votre charge mentale.</p>
 
-    <p>Prendre le temps de les accueillir plutôt que de les repousser peut progressivement alléger cette charge intérieure.</p>
-    `
-};
-const profileResume = {
+        <p>Quelques ajustements simples peuvent parfois apporter rapidement une sensation de légèreté.</p>
+        `,
 
-    stress: "Le stress quotidien semble aujourd'hui être le principal facteur qui influence votre équilibre.",
+        ecrans: `
+        <p>Les sollicitations numériques semblent occuper une place importante dans votre quotidien.</p>
 
-    rumination: "Les pensées qui reviennent régulièrement occupent actuellement une place importante dans votre fonctionnement.",
+        <p>Créer quelques moments de déconnexion favorise souvent une récupération mentale plus profonde.</p>
+        `,
 
-    hyperactivite: "Votre rythme de vie et l'enchaînement des tâches semblent fortement solliciter votre cerveau.",
+        emotion: `
+        <p>Les émotions semblent actuellement demander beaucoup d'énergie psychique.</p>
 
-    fatigue: "La fatigue mentale apparaît comme l'élément dominant de votre bilan.",
+        <p>Prendre le temps de les accueillir plutôt que de les repousser peut progressivement alléger cette charge intérieure.</p>
+        `
+    };
 
-    burnout: "Votre niveau de sollicitation mérite une attention particulière afin d'éviter un épuisement progressif.",
 
-    habitudes: "Certaines habitudes du quotidien semblent contribuer à entretenir votre charge mentale.",
+    const profileResume = {
 
-    ecrans: "Les sollicitations numériques semblent participer à votre surcharge mentale.",
+        stress: "Le stress quotidien semble aujourd'hui être le principal facteur qui influence votre équilibre.",
 
-    emotion: "La charge émotionnelle semble aujourd'hui représenter une part importante de votre fatigue."
-};
+        rumination: "Les pensées qui reviennent régulièrement occupent actuellement une place importante dans votre fonctionnement.",
 
-        analysisText.innerHTML = "";
-tipsText.innerHTML = "";
+        hyperactivite: "Votre rythme de vie et l'enchaînement des tâches semblent fortement solliciter votre cerveau.",
 
-globalTitle.textContent = resultat.title;
-globalText.textContent = resultat.text;
+        fatigue: "La fatigue mentale apparaît comme l'élément dominant de votre bilan.",
+
+        burnout: "Votre niveau de sollicitation mérite une attention particulière afin d'éviter un épuisement progressif.",
+
+        habitudes: "Certaines habitudes du quotidien semblent contribuer à entretenir votre charge mentale.",
+
+        ecrans: "Les sollicitations numériques semblent participer à votre surcharge mentale.",
+
+        emotion: "La charge émotionnelle semble aujourd'hui représenter une part importante de votre fatigue."
+    };
+
+
+    analysisText.innerHTML = "";
+    tipsText.innerHTML = "";
+
+    globalTitle.textContent = resultat.title;
+    globalText.textContent = resultat.text;
 
     profileCards.innerHTML = "";
 
-analysisText.innerHTML = `
-<h3>${diagnostic.title}</h3>
 
-<p style="margin-bottom:25px;">
-${diagnostic.text}
-</p>
+    analysisText.innerHTML = `
+        <h3>${diagnostic.title}</h3>
 
-<hr style="margin:30px 0;border:none;border-top:1px solid #e5e5e5;">
+        <p style="margin-bottom:25px;">
+        ${diagnostic.text}
+        </p>
 
-<h3>🧠 Les principaux facteurs identifiés</h3>
-`;
+        <hr style="margin:30px 0;border:none;border-top:1px solid #e5e5e5;">
 
-tipsText.innerHTML = "";
+        <h3>🧠 Les principaux facteurs identifiés</h3>
+    `;
+
+
+    tipsText.innerHTML = "";
+
 
     sortedProfiles.forEach(([profile, value]) => {
 
         const percent = Math.round((value / 12) * 100);
 
+
         profileCards.innerHTML += `
 
         <div class="profile-card">
 
-           <h4>
-    ${profileIcons[profile]}
-    ${profileLabels[profile]}
-</h4>
+            <h4>
+                ${profileIcons[profile]}
+                ${profileLabels[profile]}
+            </h4>
 
-<p>${profileDescriptions[profile]}</p>
+            <p>${profileDescriptions[profile]}</p>
 
             <div class="profile-percent">
 
-    ${Math.min(percent,100)} %
+                ${Math.min(percent,100)} %
 
-</div>
+            </div>
 
-<div class="progress-profile">
+            <div class="progress-profile">
 
-    <div
-        class="progress-profile-fill"
-        style="width:${Math.min(percent,100)}%">
-    </div>
+                <div
+                    class="progress-profile-fill"
+                    style="width:${Math.min(percent,100)}%">
+                </div>
 
-</div>
+            </div>
 
         </div>
 
         `;
+
 
         analysisText.innerHTML += `
 
@@ -751,6 +768,7 @@ tipsText.innerHTML = "";
         </p>
 
         `;
+
 
         tipsText.innerHTML += `
 
@@ -764,6 +782,7 @@ tipsText.innerHTML = "";
 
     });
 
+
     window.scrollTo({
 
         top: 0,
@@ -773,10 +792,10 @@ tipsText.innerHTML = "";
     });
 
 }
-
-/* ======================================================================
+/* =========================================================
    INITIALISATION
-   ====================================================================== */
+========================================================= */
+
 console.log(sendEmail);
 
 sendEmail.addEventListener("click", async () => {
@@ -792,7 +811,6 @@ sendEmail.addEventListener("click", async () => {
         emailInput.focus();
 
         return;
-
     }
 
     if (!consent.checked) {
@@ -800,7 +818,6 @@ sendEmail.addEventListener("click", async () => {
         alert("Merci d'accepter le traitement de votre adresse e-mail.");
 
         return;
-
     }
 
     try {
@@ -809,9 +826,11 @@ sendEmail.addEventListener("click", async () => {
             "https://bilan-bien-etre-emmaharmonie.cold-scene-540a.workers.dev/",
             {
                 method: "POST",
+
                 headers: {
                     "Content-Type": "application/json"
                 },
+
                 body: JSON.stringify({
                     prenom: prenom,
                     email: email
@@ -821,12 +840,17 @@ sendEmail.addEventListener("click", async () => {
 
         const result = await response.json();
 
-       if (result.success) {
-    alert("Votre bilan va vous être envoyé par e-mail.");
-    console.log(result);
-} else {
-    alert(result.message);
-}
+        if (result.success) {
+
+            alert("Votre bilan va vous être envoyé par e-mail.");
+
+            console.log(result);
+
+        } else {
+
+            alert(result.message);
+
+        }
 
     } catch (error) {
 
@@ -838,12 +862,14 @@ sendEmail.addEventListener("click", async () => {
 
 });
 
+
 startBtn.addEventListener("click", startQuiz);
 
 nextBtn.addEventListener("click", nextQuestion);
 
 previousBtn.addEventListener("click", previousQuestion);
 
-/* ======================================================================
+
+/* =========================================================
    FIN DU SCRIPT
-   ====================================================================== */
+========================================================= */
