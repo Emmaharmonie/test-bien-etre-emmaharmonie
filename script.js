@@ -546,7 +546,18 @@ Math.max(
 Math.round(100 - ((total / maximum) * 100))
 )
 );
+finalScore = wellbeingScore;
 
+if (finalScore >= 80) {
+    finalLevel = "Équilibre global très satisfaisant";
+} else if (finalScore >= 60) {
+    finalLevel = "Charge mentale modérée";
+} else if (finalScore >= 40) {
+    finalLevel = "Charge mentale importante";
+} else {
+    finalLevel = "Charge mentale très élevée";
+}
+   
 showResults(wellbeingScore);
 
     
