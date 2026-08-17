@@ -214,6 +214,10 @@ let currentQuestion = 0;
 let userAnswers = [];
 
 let finalScore = 0;
+let finalProfile = "";
+let finalLevel = "";
+
+let finalScore = 0;
 let mainProfile = "";
 
 const profileScores = {
