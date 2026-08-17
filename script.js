@@ -622,7 +622,7 @@ function showResults(score) {
 
     mainProfile = sortedProfiles[0][0];
     finalScore = score;
-
+    finalProfile = mainProfile;
 
     /*
      * =========================================================
