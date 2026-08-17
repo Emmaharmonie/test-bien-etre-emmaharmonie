@@ -547,7 +547,6 @@ showResults(wellbeingScore);
 function showResults(score) {
 
     quizSection.classList.add("hidden");
-
     resultSection.classList.remove("hidden");
 
     scoreValue.textContent = `${score}%`;
@@ -557,36 +556,13 @@ function showResults(score) {
 
     scoreCircle.style.strokeDashoffset = offset;
 
-    let resultat;
-
-    if (score >= 80) {
-
-        resultat = globalAnalysis.excellent;
-
-    } else if (score >= 60) {
-
-        resultat = globalAnalysis.bon;
-
-    } else if (score >= 40) {
-
-        resultat = globalAnalysis.moyen;
-
-    } else {
-
-        resultat = globalAnalysis.eleve;
-
-    }
-
-    globalTitle.textContent = resultat.title;
-    globalText.textContent = resultat.text;
-
-
-    /* =========================================================
-       Diagnostic global
-    ========================================================= */
+    /*
+     * =========================================================
+     * ANALYSE GLOBALE DU SCORE
+     * =========================================================
+     */
 
     let diagnostic;
-
 
     if (score >= 80) {
 
@@ -607,181 +583,282 @@ function showResults(score) {
 
         diagnostic = globalAnalysis.eleve;
         scoreCircle.style.stroke = "#D9534F";
-
     }
+
+    globalTitle.textContent = diagnostic.title;
+    globalText.textContent = diagnostic.text;
 
     progressFill.style.width = "100%";
 
 
+    /*
+     * =========================================================
+     * CLASSEMENT DES PROFILS
+     * =========================================================
+     */
+
     const sortedProfiles =
         Object.entries(profileScores)
-        .sort((a, b) => b[1] - a[1])
-        .slice(0, 3);
-
+            .sort((a, b) => b[1] - a[1])
+            .slice(0, 3);
 
     const mainProfile = sortedProfiles[0][0];
 
-    const personalMessage =
-        document.getElementById("personalMessage");
 
+    /*
+     * =========================================================
+     * MESSAGES PERSONNALISÉS
+     * =========================================================
+     */
 
     const profileMessages = {
 
-        stress: `
-        <p>Le stress semble actuellement être le principal facteur qui influence votre équilibre. Votre cerveau reste probablement en état de vigilance une grande partie de la journée.</p>
+        stress: {
+            title: "Le stress semble occuper une place importante",
+            text: "Vos réponses montrent que la pression du quotidien semble actuellement avoir un impact sur votre équilibre. Lorsque le cerveau reste régulièrement en vigilance, il devient plus difficile de réellement récupérer.",
+            advice: "Votre première piste pourrait être de recréer régulièrement de véritables moments de pause et de relâchement."
+        },
 
-        <p>En retrouvant progressivement des moments de récupération et de relâchement, il devient possible de retrouver davantage de calme intérieur.</p>
-        `,
+        rumination: {
+            title: "Votre esprit semble avoir du mal à décrocher",
+            text: "Vos réponses suggèrent que certaines pensées ou préoccupations continuent probablement à vous accompagner même lorsque votre journée est terminée. Cette activité mentale peut rendre les moments de repos moins récupérateurs.",
+            advice: "Apprendre progressivement à prendre du recul sur les pensées qui reviennent peut vous aider à retrouver davantage de calme."
+        },
 
-        rumination: `
-        <p>Vos réponses montrent que certaines pensées semblent revenir régulièrement et occuper beaucoup de place dans votre esprit.</p>
+        hyperactivite: {
+            title: "Votre cerveau semble particulièrement sollicité",
+            text: "Vous semblez avoir tendance à penser à plusieurs choses à la fois, à anticiper et à enchaîner les tâches. Ce fonctionnement peut donner la sensation de devoir rester constamment en mouvement.",
+            advice: "Introduire de courtes pauses entre les différentes activités peut aider votre esprit à ralentir progressivement."
+        },
 
-        <p>Apprendre à prendre du recul sur ces pensées permet souvent de retrouver davantage de sérénité au quotidien.</p>
-        `,
+        fatigue: {
+            title: "La fatigue mentale mérite votre attention",
+            text: "Vos réponses font apparaître une fatigue mentale qui semble prendre une place importante dans votre quotidien. Lorsque les périodes de récupération ne compensent plus suffisamment les sollicitations, la sensation de fatigue peut s'installer.",
+            advice: "Votre priorité peut être de préserver davantage de véritables temps de récupération, même lorsqu'ils sont courts."
+        },
 
-        hyperactivite: `
-        <p>Vous semblez avoir tendance à gérer de nombreuses tâches en parallèle sans toujours vous accorder de véritables temps de récupération.</p>
+        burnout: {
+            title: "Votre niveau de sollicitation mérite une attention particulière",
+            text: "Votre bilan montre que vous semblez actuellement porter beaucoup de responsabilités ou de sollicitations. Ce résultat ne constitue pas un diagnostic, mais il peut être utile de prendre cette sensation de surcharge au sérieux.",
+            advice: "Avant que l'épuisement ne s'installe davantage, il peut être important de retrouver progressivement un meilleur équilibre entre ce que vous devez faire et vos besoins de récupération."
+        },
 
-        <p>Ralentir légèrement le rythme permet souvent d'améliorer la concentration tout en diminuant la fatigue mentale.</p>
-        `,
+        habitudes: {
+            title: "Votre organisation quotidienne peut jouer un rôle",
+            text: "Certaines de vos réponses suggèrent que votre rythme de vie ou vos habitudes quotidiennes peuvent contribuer à maintenir une partie de votre charge mentale.",
+            advice: "Quelques ajustements simples dans votre organisation et dans la place accordée aux pauses peuvent déjà apporter davantage de légèreté."
+        },
 
-        fatigue: `
-        <p>Votre bilan montre que la fatigue mentale occupe actuellement une place importante.</p>
+        ecrans: {
+            title: "Les sollicitations numériques semblent avoir un impact",
+            text: "Votre rapport aux écrans semble faire partie des éléments qui peuvent entretenir votre charge mentale. Même lorsque l'on pense se détendre devant un écran, le cerveau peut continuer à recevoir de nombreuses sollicitations.",
+            advice: "Créer quelques moments réellement déconnectés dans la journée peut favoriser une récupération mentale plus profonde."
+        },
 
-        <p>Votre cerveau semble avoir besoin de davantage de récupération afin de retrouver progressivement toute son efficacité.</p>
-        `,
+        emotion: {
+            title: "Votre charge émotionnelle semble importante",
+            text: "Vos réponses montrent que les émotions peuvent actuellement vous demander beaucoup d'énergie. Lorsque les émotions s'accumulent sans véritable temps de récupération, elles peuvent contribuer à une sensation de saturation.",
+            advice: "Prendre régulièrement un moment pour vous recentrer et accueillir ce que vous ressentez peut progressivement alléger cette charge."
+        }
 
-        burnout: `
-        <p>Votre niveau de sollicitation paraît élevé et mérite d'être pris en considération avant que l'épuisement ne s'installe durablement.</p>
-
-        <p>Il peut être bénéfique de retrouver progressivement un meilleur équilibre entre vos obligations et votre récupération.</p>
-        `,
-
-        habitudes: `
-        <p>Votre organisation quotidienne semble aujourd'hui participer à votre charge mentale.</p>
-
-        <p>Quelques ajustements simples peuvent parfois apporter rapidement une sensation de légèreté.</p>
-        `,
-
-        ecrans: `
-        <p>Les sollicitations numériques semblent occuper une place importante dans votre quotidien.</p>
-
-        <p>Créer quelques moments de déconnexion favorise souvent une récupération mentale plus profonde.</p>
-        `,
-
-        emotion: `
-        <p>Les émotions semblent actuellement demander beaucoup d'énergie psychique.</p>
-
-        <p>Prendre le temps de les accueillir plutôt que de les repousser peut progressivement alléger cette charge intérieure.</p>
-        `
     };
 
 
-    const profileResume = {
+    const personalMessage =
+        profileMessages[mainProfile];
 
-        stress: "Le stress quotidien semble aujourd'hui être le principal facteur qui influence votre équilibre.",
 
-        rumination: "Les pensées qui reviennent régulièrement occupent actuellement une place importante dans votre fonctionnement.",
+    /*
+     * =========================================================
+     * AFFICHAGE DU MESSAGE PERSONNALISÉ
+     * =========================================================
+     */
 
-        hyperactivite: "Votre rythme de vie et l'enchaînement des tâches semblent fortement solliciter votre cerveau.",
+    const personalMessageElement =
+        document.getElementById("personalMessage");
 
-        fatigue: "La fatigue mentale apparaît comme l'élément dominant de votre bilan.",
+    if (personalMessageElement) {
 
-        burnout: "Votre niveau de sollicitation mérite une attention particulière afin d'éviter un épuisement progressif.",
+        personalMessageElement.innerHTML = `
 
-        habitudes: "Certaines habitudes du quotidien semblent contribuer à entretenir votre charge mentale.",
+            <div class="personal-result">
 
-        ecrans: "Les sollicitations numériques semblent participer à votre surcharge mentale.",
+                <h2>
+                    🧠 ${personalMessage.title}
+                </h2>
 
-        emotion: "La charge émotionnelle semble aujourd'hui représenter une part importante de votre fatigue."
-    };
+                <p>
+                    ${personalMessage.text}
+                </p>
 
+                <p>
+                    ${personalMessage.advice}
+                </p>
+
+            </div>
+
+        `;
+    }
+
+
+    /*
+     * =========================================================
+     * RÉINITIALISATION DES ZONES DE RÉSULTAT
+     * =========================================================
+     */
 
     analysisText.innerHTML = "";
     tipsText.innerHTML = "";
-
-    globalTitle.textContent = resultat.title;
-    globalText.textContent = resultat.text;
-
     profileCards.innerHTML = "";
 
 
-    analysisText.innerHTML = `
-        <h3>${diagnostic.title}</h3>
+    /*
+     * =========================================================
+     * ANALYSE DU BILAN
+     * =========================================================
+     */
 
-        <p style="margin-bottom:25px;">
-        ${diagnostic.text}
+    analysisText.innerHTML = `
+
+        <h3>
+            ${diagnostic.title}
+        </h3>
+
+        <p>
+            ${diagnostic.text}
         </p>
 
         <hr style="margin:30px 0;border:none;border-top:1px solid #e5e5e5;">
 
-        <h3>🧠 Les principaux facteurs identifiés</h3>
+        <h3>
+            🧠 Les principaux facteurs identifiés
+        </h3>
+
+        <p>
+            Votre questionnaire permet d'identifier les domaines qui
+            semblent actuellement avoir le plus d'impact sur votre équilibre.
+        </p>
+
     `;
 
 
-    tipsText.innerHTML = "";
-
+    /*
+     * =========================================================
+     * AFFICHAGE DES 3 PROFILS PRINCIPAUX
+     * =========================================================
+     */
 
     sortedProfiles.forEach(([profile, value]) => {
 
-        const percent = Math.round((value / 12) * 100);
-
+        const percent =
+            Math.min(
+                100,
+                Math.round((value / 12) * 100)
+            );
 
         profileCards.innerHTML += `
 
-        <div class="profile-card">
+            <div class="profile-card">
 
-            <h4>
-                ${profileIcons[profile]}
-                ${profileLabels[profile]}
-            </h4>
+                <h4>
+                    ${profileIcons[profile]}
+                    ${profileLabels[profile]}
+                </h4>
 
-            <p>${profileDescriptions[profile]}</p>
+                <p>
+                    ${profileDescriptions[profile]}
+                </p>
 
-            <div class="profile-percent">
+                <div class="profile-percent">
+                    ${percent} %
+                </div>
 
-                ${Math.min(percent,100)} %
+                <div class="progress-profile">
 
-            </div>
+                    <div
+                        class="progress-profile-fill"
+                        style="width:${percent}%">
+                    </div>
 
-            <div class="progress-profile">
-
-                <div
-                    class="progress-profile-fill"
-                    style="width:${Math.min(percent,100)}%">
                 </div>
 
             </div>
-
-        </div>
 
         `;
 
 
         analysisText.innerHTML += `
 
-        <p>
+            <p>
 
-            <strong>${profileLabels[profile]} :</strong>
-            ${profileDescriptions[profile]}
+                <strong>
+                    ${profileLabels[profile]}
+                </strong>
 
-        </p>
+                : ${profileDescriptions[profile]}
+
+            </p>
 
         `;
 
 
         tipsText.innerHTML += `
 
-        <p>
-
-            • ${tips[profile]}
-
-        </p>
+            <p>
+                🌿 ${tips[profile]}
+            </p>
 
         `;
 
     });
 
+
+    /*
+     * =========================================================
+     * DONNÉES DISPONIBLES POUR L'ENVOI DU MAIL
+     * =========================================================
+     */
+
+    window.bilanResult = {
+
+        score: score,
+
+        globalTitle: diagnostic.title,
+
+        globalText: diagnostic.text,
+
+        mainProfile: mainProfile,
+
+        mainProfileLabel:
+            profileLabels[mainProfile],
+
+        personalTitle:
+            personalMessage.title,
+
+        personalText:
+            personalMessage.text,
+
+        personalAdvice:
+            personalMessage.advice,
+
+        profiles:
+            sortedProfiles.map(([profile, value]) => ({
+                profile: profile,
+                label: profileLabels[profile],
+                score: Math.min(
+                    100,
+                    Math.round((value / 12) * 100)
+                )
+            }))
+
+    };
+
+
+    /*
+     * =========================================================
+     * RETOUR EN HAUT DU RÉSULTAT
+     * =========================================================
+     */
 
     window.scrollTo({
 
