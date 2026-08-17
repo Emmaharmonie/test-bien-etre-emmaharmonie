@@ -914,8 +914,10 @@ sendEmail.addEventListener("click", async () => {
 
                 body: JSON.stringify({
                     prenom: prenom,
-                    email: email
-                })
+                    email: email,
+                    score: finalScore,
+                    profil: mainProfile
+})
             }
         );
 
