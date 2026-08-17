@@ -213,6 +213,9 @@ const profileIcons = {
 let currentQuestion = 0;
 let userAnswers = [];
 
+let finalScore = 0;
+let mainProfile = "";
+
 const profileScores = {
     stress: 0,
     rumination: 0,
