@@ -217,7 +217,6 @@ let finalScore = 0;
 let finalProfile = "";
 let finalLevel = "";
 
-let finalScore = 0;
 let mainProfile = "";
 
 const profileScores = {
