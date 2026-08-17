@@ -605,7 +605,8 @@ function showResults(score) {
             .sort((a, b) => b[1] - a[1])
             .slice(0, 3);
 
-    const mainProfile = sortedProfiles[0][0];
+    mainProfile = sortedProfiles[0][0];
+    finalScore = score;
 
 
     /*
